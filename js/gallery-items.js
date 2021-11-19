@@ -1,4 +1,4 @@
-const galleryItems = [
+export const galleryItems = [
   {
     preview:
       'https://cdn.pixabay.com/photo/2019/05/14/16/43/himilayan-blue-poppy-4202825__340.jpg',
@@ -63,48 +63,3 @@ const galleryItems = [
     description: 'Lighthouse Coast Sea',
   },
 ];
-
-const galleryElem = document.querySelector('.js-gallery');
-
-galleryItems.forEach(num => galleryElem.insertAdjacentHTML('beforeend', `<li class="gallery__item">
-  <a
-    class="gallery__link"
-   
-  >
-    <img
-      class="gallery__image"
-      src="${num.preview}"
-      data-source="${num.original}"
-      alt="${num.description}"
-    />
-  </a>
-</li>
-`));
-const modalWindow = document.querySelector('.js-lightbox');
-const btnClose = document.querySelector('.lightbox__button');
-const personalImg = document.querySelector('.lightbox__image');
-
-const openModal = ({target}) => {
-  if (target.nodeName !== 'IMG') {
-    return
-  }
-  modalWindow.classList.add('is-open');
-  personalImg.src = target.dataset.source;
-}
-
-
-// Закрытие модального окна
-const closeModalBtn = (even) => {
-  if (even.code === "Escape") {
-    modalWindow.classList.remove('is-open')
-    personalImg.src = '';
-    return
-  }
-
-  modalWindow.classList.remove('is-open')
-  personalImg.src = '';
-}
-
-window.addEventListener('keydown', closeModalBtn);
-btnClose.addEventListener('click', closeModalBtn)
-galleryElem.addEventListener('click', openModal);
